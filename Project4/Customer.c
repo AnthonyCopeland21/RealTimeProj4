@@ -17,9 +17,7 @@ void *customer_thread(void *arg){
 	printf("Creation of customer queue\n");
 	// loop for while the queue is not empty and bank is open
 	// note: the bank will always be open before customer_thread is started
-	while (1){
 
-	}
 	// for each new customer, realloc(queue, sizeof(Customer))
 
 	free(queue);

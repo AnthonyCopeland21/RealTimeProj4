@@ -8,10 +8,13 @@
 #include <stdio.h>
 #include <sys/neutrino.h>
 #include <time.h>
+#include <unistd.h>
 
+static int bank_open = 0;
 
 // PROTOTYPES
 void open_bank_timer(int seconds_open);
-void teller_sleep(int seconds_sleep);
+void *close_bank(void *arg);
+int get_bank_open(void);
 
-#endif /* TIMING_H_ */
+#endif /* TIMING_H_*/

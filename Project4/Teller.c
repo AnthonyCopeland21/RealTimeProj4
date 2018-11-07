@@ -47,12 +47,13 @@ void *teller_thread(void *arg){
 
 	printf("Creation of teller %d\n", i+1);
 	// loop for whole day of work
-	while(1){
+	/*while(1){
 		// nested loop waiting for teller to be unavailable
 		while(!tellers[i].available){
 			// do teller stuff
 		}
-	}
+	}*/
+
 	pthread_exit(NULL);
 }
 

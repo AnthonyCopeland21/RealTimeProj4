@@ -1,32 +1,51 @@
 #include "Timing.h"
 
-static int bank_open = 0;
+void *close_bank(void *arg){
+	bank_open = 0;
+	printf("%d\n", (int)arg);
+	time_t rawtime;
+	struct tm * timeinfo;
+	time ( &rawtime );
+	timeinfo = localtime ( &rawtime );
+	printf ( "END! Time and date: %s\n", asctime (timeinfo) );
+	timer_delete((timer_t)arg);
+	pthread_exit(NULL);
+}
 
 void open_bank_timer(int seconds_open){
+	time_t rawtime;
+	struct tm * timeinfo;
+	time ( &rawtime );
+	timeinfo = localtime ( &rawtime );
+	printf ( "OPEN! Time and date: %s\n", asctime (timeinfo) );
+
 	struct sigevent interupt;
-	struct itimerspec timer;
+	struct itimerspec value;
+	struct itimerspec old_value;
 	struct timespec end;
 	struct timespec restart;
-
 	timer_t timer_id;
-	interupt.sigev_notify = SIGEV_SIGNAL_CODE;
-	interupt.sigev_signo = 6;
-	interupt.sigev_code = 666;
-	interupt.sigev_priority = 5;
 
-	end.tv_sec = (long)seconds_open;
-	end.tv_nsec = (long)(seconds_open * 1000000000);
+	interupt.sigev_notify = SIGEV_THREAD;
+	interupt.sigev_notify_function = &close_bank;
+	interupt.sigev_notify_attributes = NULL;
+	interupt.sigev_value.sival_ptr = &timer_id;
+
+	end.tv_sec = 0;
+	// for scaling purposes: 1 second of time is 1us simulated time
+	end.tv_nsec = (long)(seconds_open * 1000);
 	restart.tv_nsec = 0;
 	restart.tv_sec = 0;
+	value.it_interval = restart;
+	value.it_value = end;
+	old_value.it_interval = restart;
+	old_value.it_value = restart;
 
 	bank_open = 1;
 	timer_create(CLOCK_REALTIME, &interupt, &timer_id);
-	timer_settime(timer_id, 0, &end, &restart);
+	timer_settime(timer_id, 0, &value, &old_value);
 }
 
-
-
-
-
-void teller_sleep(int seconds_sleep){
+int get_bank_open(void){
+	return bank_open;
 }
