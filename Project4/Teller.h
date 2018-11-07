@@ -8,6 +8,8 @@ typedef struct {
 	int available;
 	int break_number;
 	int break_time;
+	int customer_transaction_time;
+	int total_customer_count;
 	pthread_t id;
 } Teller;
 

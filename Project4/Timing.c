@@ -31,9 +31,9 @@ void open_bank_timer(int seconds_open){
 	interupt.sigev_notify_attributes = NULL;
 	interupt.sigev_value.sival_ptr = &timer_id;
 
-	end.tv_sec = 0;
+	end.tv_sec = (long)(seconds_open / 10000);
 	// for scaling purposes: 1 second of time is 1us simulated time
-	end.tv_nsec = (long)(seconds_open * 1000);
+	end.tv_nsec = (long)(seconds_open % 10000) * 1000000;
 	restart.tv_nsec = 0;
 	restart.tv_sec = 0;
 	value.it_interval = restart;

@@ -41,18 +41,23 @@ void create_teller_threads(void){
 void *teller_thread(void *arg){
 	int i = (int)arg;
 	// initialize teller arguments
-	tellers[i].available = 1;
+	tellers[i].available = 0;
 	tellers[i].break_number = 0;
 	tellers[i].break_time = 0;
+	tellers[i].customer_transaction_time = 0;
+	tellers[i].total_customer_count = 0;
 
 	printf("Creation of teller %d\n", i+1);
-	// loop for whole day of work
-	/*while(1){
-		// nested loop waiting for teller to be unavailable
-		while(!tellers[i].available){
-			// do teller stuff
+	printf("Bank open: %d\n", get_bank_open());
+	// loop to wait for bank to open
+	while(!get_bank_open()){
+		usleep(10);
+	}
+	// loop to wait for bank to close and customer queue to be 0
+	while(get_bank_open()){
+		if(!teller[i].available){
 		}
-	}*/
+	}
 
 	pthread_exit(NULL);
 }
