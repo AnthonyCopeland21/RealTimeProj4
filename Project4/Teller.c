@@ -6,15 +6,15 @@ static Teller tellers[3];
 /* Purpose: Provide next available teller
  * Inputs: tellers - array of all tellers
  * Output: 1->length of tellers for available teller
- * 		   0 for no available teller
+ * 		   -1 for no available teller
  */
 int available_teller(Teller *tellers) {
 	int i = 0;
 	// loop runs through tellers that
 	for (i = 0; i < (sizeof(tellers)/sizeof(tellers[0])); i++){
-		if (tellers[i].available) return (i + 1);
+		if (tellers[i].available) return i;
 	}
-	return 0;
+	return -1;
 }
 
 /* Purpose: Creates threads for tellers
@@ -53,6 +53,7 @@ void *teller_thread(void *arg){
 	while(!get_bank_open()){
 		usleep(10);
 	}
+	tellers[i].available = 1;
 	// loop to wait for bank to close and customer queue to be 0
 	while(get_bank_open()){
 		if(!teller[i].available){

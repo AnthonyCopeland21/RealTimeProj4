@@ -19,10 +19,21 @@ void *customer_thread(void *arg){
 		usleep(10);
 	}
 	int counter = 1;
-
+	int j = 0;
 	// loop to wait for bank to close. Adds customers to queue
 	while(get_bank_open()){
+		// access current time.
+		// wait for time to elapse over randomized time
+		// put the wait in a loop, so that it can constantly check
+		// for available tellers
+		j = available_teller();
+		if (j != -1) teller[j].transaction_time = queue[count].transaction_time;
+
+
 		// waiting for customer to arrive
+		// you cant sleep because if there's a line in the queue and 
+		// the teller finishes with acustomer, the teller needs to take
+		// the next customer in line, and cannot do that when sleeping
 		usleep((rand() % 180 + 60) * 100);
 		printf("In Customer thread: %d\n", counter);
 	}
