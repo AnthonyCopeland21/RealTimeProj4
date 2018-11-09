@@ -8,7 +8,7 @@ static Teller tellers[3];
  * Output: 1->length of tellers for available teller
  * 		   -1 for no available teller
  */
-int available_teller(Teller *tellers) {
+int available_teller(void) {
 	int i = 0;
 	// loop runs through tellers that
 	for (i = 0; i < (sizeof(tellers)/sizeof(tellers[0])); i++){
@@ -34,6 +34,24 @@ void create_teller_threads(void){
 	}
 }
 
+/* Purpose: Set transaction time for available teller
+ * Inputs:  trans_time - time for transaction
+ * 			teller - 0->2 for available teller
+ * Output:  None
+ * */
+void set_transaction_time(int trans_time, int teller){
+	tellers[teller].customer_transaction_time = trans_time;
+}
+
+/* Purpose: Set availability for teller
+ * Inputs:  available - teller availability
+ * 			teller - 0->2 for available teller
+ * Output:  None
+ * */
+void set_available(int available, int teller){
+	tellers[teller].available = available;
+}
+
 /* Purpose: Thread function for the teller
  * Inputs:  None
  * Output:  None
@@ -48,7 +66,6 @@ void *teller_thread(void *arg){
 	tellers[i].total_customer_count = 0;
 
 	printf("Creation of teller %d\n", i+1);
-	printf("Bank open: %d\n", get_bank_open());
 	// loop to wait for bank to open
 	while(!get_bank_open()){
 		usleep(10);
@@ -56,7 +73,10 @@ void *teller_thread(void *arg){
 	tellers[i].available = 1;
 	// loop to wait for bank to close and customer queue to be 0
 	while(get_bank_open()){
-		if(!teller[i].available){
+		// this is only set to 0 in customer thread
+		if(!tellers[i].available){
+			usleep(tellers[i].customer_transaction_time);
+			tellers[i].available = 1;
 		}
 	}
 

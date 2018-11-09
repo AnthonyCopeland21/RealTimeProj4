@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/neutrino.h>
+#include <sys/time.h>
 #include <time.h>
 #include <unistd.h>
 

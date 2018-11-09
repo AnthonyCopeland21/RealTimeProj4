@@ -14,8 +14,10 @@ typedef struct {
 } Teller;
 
 // PROTOTYPES
-int available_teller(Teller *tellers);
+int available_teller(void);
 void create_teller_threads();
+void set_transaction_time(int trans_time, int teller);
+void set_available(int available, int teller);
 void *teller_thread(void *arg);
 
 

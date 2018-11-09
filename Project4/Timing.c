@@ -1,8 +1,9 @@
 #include "Timing.h"
 
+#include <math.h>
 void *close_bank(void *arg){
 	bank_open = 0;
-	printf("%d\n", (int)arg);
+
 	time_t rawtime;
 	struct tm * timeinfo;
 	time ( &rawtime );
@@ -31,9 +32,11 @@ void open_bank_timer(int seconds_open){
 	interupt.sigev_notify_attributes = NULL;
 	interupt.sigev_value.sival_ptr = &timer_id;
 
-	end.tv_sec = (long)(seconds_open / 10000);
+	end.tv_sec = (unsigned long)(seconds_open / 10000);
 	// for scaling purposes: 1 second of time is 1us simulated time
-	end.tv_nsec = (long)(seconds_open % 10000) * 1000000;
+	if (seconds_open < 10000) end.tv_nsec = (unsigned long)(seconds_open * 1000000);
+	else end.tv_nsec = (long)(seconds_open - end.tv_sec * 10000) * 1000000;
+	printf("Bank will be open for %lu %f %f seconds\n", (unsigned long)end.tv_sec, (float)((unsigned long)end.tv_nsec)*pow(10,-12), (float)((unsigned long)end.tv_sec+((unsigned long)end.tv_nsec)*pow(10,-12)));
 	restart.tv_nsec = 0;
 	restart.tv_sec = 0;
 	value.it_interval = restart;

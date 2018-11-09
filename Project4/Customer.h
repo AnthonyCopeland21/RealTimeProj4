@@ -3,13 +3,14 @@
 
 #include "Timing.h"
 
-typedef struct {
+typedef struct{
 	int queue_enter_time;
 	int queue_exit_time;
 	int transaction_time;
 } Customer;
 
 // PROTOTYPES
+void *add_customer(void *arg);
 void *customer_thread(void *arg);
 int max_customer_queue_time(Customer *customers);
 int max_wait_teller_time(Customer *customers);
