@@ -9,7 +9,7 @@ static int enter_customer = 0;
  */
 void *add_customer(void *arg){
 	// simulated 1 to 4 minutes of wait time for another customer to enter
-	usleep(rand() % 180 + 60 * 100);
+	usleep((rand() % 180 + 60));
 	enter_customer = 1;
 	pthread_exit(NULL);
 }
@@ -39,9 +39,9 @@ void *customer_thread(void *arg){
 	while(get_bank_open()){
 		// customer has entered. add him to queue
 		if(enter_customer){
-			gettimeofday(&start, NULL);
-			queue[customer_count].queue_enter_time = start.tv_usec + start.tv_sec * 1000000;
-			queue[customer_count].transaction_time = (rand() % 450 + 30) * 100;
+			//gettimeofday(&start, NULL);
+			//queue[customer_count].queue_enter_time = start.tv_usec + start.tv_sec * 1000000;
+			//queue[customer_count].transaction_time = (rand() % 450 + 30);
 			customer_count++;
 
 			enter_customer = 0;
@@ -49,10 +49,10 @@ void *customer_thread(void *arg){
 		}
 		j = available_teller();
 		if (j != -1 && !(next_customer > customer_count)) {
-			gettimeofday(&stop, NULL);
-			queue[customer_count].queue_exit_time = stop.tv_usec + start.tv_sec * 1000000;
-			set_transaction_time(queue[next_customer].transaction_time, j);
-			set_available(0, j);
+			//gettimeofday(&stop, NULL);
+			//queue[customer_count].queue_exit_time = stop.tv_usec + start.tv_sec * 1000000;
+			//set_transaction_time(queue[next_customer].transaction_time, j);
+			//set_available(0, j);
 			next_customer++;
 		}
 	}
