@@ -9,7 +9,7 @@ static int enter_customer = 0;
  */
 void *add_customer(void *arg){
 	// simulated 1 to 4 minutes of wait time for another customer to enter
-	usleep((rand() % 180 + 60) * 10000);
+	usleep((rand() % 180 + 60) * 1000);
 	enter_customer = 1;
 	pthread_exit(NULL);
 }
@@ -41,7 +41,7 @@ void *customer_thread(void *arg){
 		if(enter_customer){
 			gettimeofday(&start, NULL);
 			queue[customer_count].queue_enter_time = start.tv_usec + start.tv_sec * 1000000;
-			queue[customer_count].transaction_time = (rand() % 450 + 30) * 10000;
+			queue[customer_count].transaction_time = (rand() % 450 + 30) * 1000;
 			customer_count++;
 
 			enter_customer = 0;
@@ -60,7 +60,7 @@ void *customer_thread(void *arg){
 	// Statistics should go down here
 	printf("Calculating statistics for the day...\n");
 	printf("Total Customers: %d\n", customer_count);
-	printf("Max transaction time: %d\n", (max_transaction_time(queue))/10000);
+	printf("Max transaction time: %d\n", (max_transaction_time(queue))/1000);
 	free(queue);
 	pthread_exit(NULL);
 }
