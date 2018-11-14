@@ -1,7 +1,7 @@
 #include "Bank.h"
 
 void bank_is_open(){
-	open_bank_timer(21);
+	open_bank_timer(42);
 	while (get_bank_open()){
 		usleep(10);
 	}

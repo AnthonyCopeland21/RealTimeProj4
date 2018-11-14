@@ -62,7 +62,7 @@ void *customer_thread(void *arg){
 	printf("Calculating statistics for the day...\n");
 	printf("Total Customers: %d\n", customer_count);
 	printf("Max transaction time: %d\n", (max_transaction_time(queue))/1400);
-	for (i = 0; i < 2; i++){
+	for (i = 0; i < 3; i++){
 		printf("Teller %d: %d\n", i, get_teller_customer_count(i));
 	}
 	free(queue);
