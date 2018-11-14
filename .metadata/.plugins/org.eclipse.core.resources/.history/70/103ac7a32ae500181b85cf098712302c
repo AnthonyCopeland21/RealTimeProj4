@@ -1,0 +1,66 @@
+#include "Customer.h"
+#include "Teller.h"
+
+static int enter_customer = 0;
+
+/* Purpose: Thread function to sleep until customer needs to be added to queue
+ * Inputs:  (void *) arg for arguments added in pthread_create
+ * Output:  None
+ */
+void *add_customer(void *arg){
+	// simulated 1 to 4 minutes of wait time for another customer to enter
+	usleep((rand() % 180 + 60) * 100);
+	enter_customer = 1;
+	pthread_exit(NULL);
+}
+
+/* Purpose: Thread function for the customer queue
+ * Inputs:  (void *) arg for arguments added in pthread_create
+ * Output:  None
+ */
+void *customer_thread(void *arg){
+	// initialize customer arguments
+	Customer *queue;
+	pthread_t add_cust_id;
+	int j = 0;
+	int customer_count = 0;
+	int next_customer = 0;
+	int ret = 0;
+	struct timeval start, stop;
+	// 420 is max number of customer that can be received in a day (60 per hour for 7 hours)
+	queue = malloc(sizeof(Customer) * 420);
+	memset(queue, 0, sizeof(Customer) * 420);
+	// loop to wait for bank to open
+	while(!(get_bank_open())){
+		usleep(10);
+	}
+	// loop to wait for bank to close. Adds customers to queue
+	ret = pthread_create(&add_cust_id, NULL, &add_customer, (void *)NULL);
+	while(get_bank_open()){
+		// customer has entered. add him to queue
+		if(enter_customer){
+			//gettimeofday(&start, NULL);
+			//queue[customer_count].queue_enter_time = start.tv_usec + start.tv_sec * 1000000;
+			//queue[customer_count].transaction_time = (rand() % 450 + 30);
+			customer_count++;
+
+			enter_customer = 0;
+			ret = pthread_create(&add_cust_id, NULL, &add_customer, (void *)NULL);
+		}
+		j = available_teller();
+		if (j != -1 && !(next_customer > customer_count)) {
+			//gettimeofday(&stop, NULL);
+			//queue[customer_count].queue_exit_time = stop.tv_usec + start.tv_sec * 1000000;
+			//set_transaction_time(queue[next_customer].transaction_time, j);
+			//set_available(0, j);
+			next_customer++;
+		}
+	}
+
+	// Statistics should go down here
+	printf("Calculating statistics for the day...\n");
+	printf("Total Customers: %d\n", customer_count);
+
+	free(queue);
+	pthread_exit(NULL);
+}

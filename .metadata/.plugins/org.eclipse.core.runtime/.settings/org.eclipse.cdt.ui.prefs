@@ -1,0 +1,7 @@
+#Tue Nov 06 22:35:06 EST 2018
+spelling_locale_initialized=true
+useAnnotationsPrefPage=true
+markOccurrences=false
+eclipse.preferences.version=1
+wizard.preferred.toolchains=com.qnx.qcc.toolChain com.qnx.qcc.toolChain.exe.coverage com.qnx.qcc.toolChain.sharedLib.coverage com.qnx.qcc.toolChain.staticLib.coverage
+useQuickDiffPrefPage=true

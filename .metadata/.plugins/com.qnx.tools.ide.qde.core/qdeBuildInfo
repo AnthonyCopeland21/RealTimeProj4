@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QdeProjectsBuildInfo>
+<qdeBuildInfo IMemento.internal.id="Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4" buildConfig="_x86_g" projectName="Project4">
+<srcDirs>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4/x86/o</element>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4/x86/o-g</element>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4/x86</element>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4</element>
+</srcDirs>
+<libDirs>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4/x86/o-g</element>
+<element>C:/QNX650/target/qnx6/x86/lib</element>
+<element>C:/QNX650/target/qnx6/x86/usr/lib</element>
+</libDirs>
+<incDirs>
+<element>C:/QNX650/target/qnx6/usr/include</element>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4/x86/o-g</element>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4/x86/o</element>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4/x86</element>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4</element>
+</incDirs>
+<libs/>
+<SRCS>
+<element>Z:/RealTimeEmbedded/Projects/RealTimeProj4/Project4/Project4.c</element>
+</SRCS>
+</qdeBuildInfo>
+</QdeProjectsBuildInfo>

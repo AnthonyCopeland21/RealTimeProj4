@@ -1,0 +1,75 @@
+#include "Teller.h"
+
+typedef struct {
+	int available;
+	int break_number;
+	int break_time;
+	pthread_t id;
+} Teller;
+
+static Teller tellers[3];
+
+/* Purpose: Creates threads for tellers
+ * Inputs:  None
+ * Outputs: None
+ */
+void create_teller_threads(void){
+	// loop to create 3 teller threads
+	for(i = 0; i < 3; i++) {
+		ret = pthread_create(&tellers[i].id, NULL, &teller_thread, (void *)i);
+		if (ret != 0){
+			printf("ERROR: pthread_create() failed\n");
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
+/* Purpose: Thread function for the teller
+ * Inputs:  None
+ * Output:  None
+ */
+void *teller_thread(void *arg){
+	int i = (int)arg;
+	// initialize teller arguments
+	tellers[i].available = 1;
+	tellers[i].break_number = 0;
+	tellers[i].break_time = 0;
+
+	printf("Creation of teller %d\n", i+1);
+	// loop for whole day of work
+	while(bank_open){
+		// nested loop waiting for teller to be unavailable
+		while(!tellers[i].available){
+			// do teller stuff
+		}
+	}
+
+	pthread_exit(NULL);
+}
+
+/* Purpose: Thread function for the customer queue
+ * Inputs:  (void *) arg for arguments added in pthread_create
+ * Output:  None
+ */
+void *customer_thread(void *arg){
+	// initialize customer arguments
+	Customer *queue;
+	int count = 0;
+	// int last_customer_count = 0;
+	queue = malloc(sizeof(Customer));
+	queue[count].queue_enter_time = 0;  // initialized to first count
+	queue[count].queue_exit_time = 0;
+	queue[count].transaction_time = rand() % 450 + 30;
+	count++;
+	printf("Creation of customer queue\n");
+	// loop for while the queue is not empty and bank is open
+	// note: the bank will always be open before customer_thread is started
+	while (count > 0 || bank_open){
+
+	}
+	// for each new customer, realloc(queue, sizeof(Customer))
+
+	free(queue);
+
+	pthread_exit(NULL);
+}

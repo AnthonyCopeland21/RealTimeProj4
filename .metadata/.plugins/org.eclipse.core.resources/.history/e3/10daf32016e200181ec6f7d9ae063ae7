@@ -1,0 +1,8 @@
+#ifndef BANK_H_
+#define BANK_H_
+
+#include <signal.h>
+#inclued <time.h>
+
+
+#endif /* BANK_H_ */

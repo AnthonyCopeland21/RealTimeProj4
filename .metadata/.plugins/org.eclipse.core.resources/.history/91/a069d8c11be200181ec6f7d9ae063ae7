@@ -1,0 +1,10 @@
+#ifndef TIMING_H_
+#define TIMING_H_
+
+#include <signal.h>
+#include <time.h>
+
+// PROTOTYPES
+
+
+#endif /* TIMING_H_ */

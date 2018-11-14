@@ -1,0 +1,14 @@
+#ifndef CUSTOMER_H_
+#define CUSTOMER_H_
+
+#include <malloc.h>
+
+typedef struct {
+	int queue_enter_time;
+	int queue_exit_time;
+	int transaction_time;
+} Customer;
+
+void *customer_thread(void *arg);
+
+#endif /* CUSTOMER_H_ */

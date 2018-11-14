@@ -1,0 +1,44 @@
+#include "Bank.h"
+
+
+// GLOBALS
+Customer customers[420];  // 420 is max number of customers in a day (1 per minute)
+
+
+// PROTOTYPES
+int max_customer_queue_time(Customer *customers);
+int max_wait_teller_time(Customer *customers);
+int max_transaction_time(Customer *customers);
+
+int main(int argc, char *argv[]) {
+	printf("Welcome to the Bank!\n");
+	int ret = 0;
+	timer_t id;
+	struct sigevent interupt;
+	interupt.sigev_notify = SIGEV_SIGNAL;
+	interupt.sigev_coid = NULL;
+
+
+	pthread_t queue_id;
+
+
+	// bank opens
+	timer_create(CLOCK_MONOTONIC, &interupt, &id);
+	/*
+	outp(base+12, 0x70);  // low
+	outp(base+13, 0x62);  // mid
+	outp(base+14, 0x00);  // high
+	// this set the counter to 0x6270 (I think)
+	outp(base+15, 0x02);  // loads counter
+	outp(base+15, 0x04);  // enables counter, starts time
+	*/
+
+	// customer queue created
+	ret = pthread_create(&queue_id, NULL, &customer_thread, (void *)NULL);
+
+	pthread_exit(NULL);
+	return EXIT_SUCCESS;
+}
+
+
+

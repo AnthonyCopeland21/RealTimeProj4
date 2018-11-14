@@ -1,0 +1,14 @@
+#include "Bank.h"
+
+// PROTOTYPES
+int max_customer_queue_time(Customer *customers);
+int max_wait_teller_time(Customer *customers);
+int max_transaction_time(Customer *customers);
+
+int main(int argc, char *argv[]) {
+	prep_for_open();
+	return EXIT_SUCCESS;
+}
+
+
+

@@ -1,0 +1,12 @@
+#include "Teller.h"
+
+typedef struct {
+	int available;
+	int break_number;
+	int break_time;
+	pthread_t id;
+} Teller;
+
+static Teller tellers[3];
+
+void create_teller_threads();

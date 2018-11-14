@@ -1,0 +1,71 @@
+#include "Customer.h"
+#include "Teller.h"
+
+static int enter_customer = 0;
+
+/* Purpose: Thread function to sleep until customer needs to be added to queue
+ * Inputs:  (void *) arg for arguments added in pthread_create
+ * Output:  None
+ */
+void *add_customer(void *arg){
+	// simulated 1 to 4 minutes of wait time for another customer to enter
+	usleep((rand() % 180 + 60) * 100);
+	enter_customer = 1;
+	pthread_exit(NULL);
+}
+
+/* Purpose: Thread function for the customer queue
+ * Inputs:  (void *) arg for arguments added in pthread_create
+ * Output:  None
+ */
+void *customer_thread(void *arg){
+	// initialize customer arguments
+	Customer *queue;
+	pthread_t add_cust_id;
+	int j = 0;
+	int customer_count = 0;
+	int next_customer = 0;
+	int ret = 0;
+	struct timeval start, stop;
+	queue = malloc(sizeof(Customer));
+	printf("Creation of customer queue: %d\n", get_bank_open());
+	// loop to wait for bank to open
+	while(!(get_bank_open())){
+		usleep(10);
+	}
+	// loop to wait for bank to close. Adds customers to queue
+	ret = pthread_create(&add_cust_id, NULL, &add_customer, (void *)NULL);
+	while(get_bank_open()){
+
+		// customer has entered. add him to queue
+		if(enter_customer){
+			queue = realloc(queue, customer_count * sizeof(Customer));
+			gettimeofday(&start, NULL);
+			queue[customer_count].queue_enter_time = start.tv_usec + start.tv_sec * 1000000;
+			queue[customer_count].transaction_time = rand() % 450 + 30;
+			customer_count++;
+
+			enter_customer = 0;
+			ret = pthread_create(&add_cust_id, NULL, &add_customer, (void *)NULL);
+		}
+		j = available_teller();
+		if (j != -1 && !(next_customer > customer_count)) {
+			gettimeofday(&stop, NULL);
+			queue[customer_count].queue_exit_time = 0;
+			set_transaction_time(queue[next_customer].transaction_time, j);
+			next_customer++;
+		}
+
+		// waiting for customer to arrive
+		// you cant sleep because if there's a line in the queue and 
+		// the teller finishes with acustomer, the teller needs to take
+		// the next customer in line, and cannot do that when sleeping
+	}
+	// for each new customer, realloc(queue, sizeof(Customer))
+
+	// Statistics should go down here
+	printf("Calculating statistics for the day...\n");
+
+	free(queue);
+	pthread_exit(NULL);
+}

@@ -1,0 +1,7 @@
+#ifndef TELLER_H_
+#define TELLER_H_
+
+void create_teller_threads();
+
+
+#endif /* TELLER_H_ */
