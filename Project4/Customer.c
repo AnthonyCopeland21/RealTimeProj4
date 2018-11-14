@@ -9,7 +9,7 @@ static int enter_customer = 0;
  */
 void *add_customer(void *arg){
 	// simulated 1 to 4 minutes of wait time for another customer to enter
-	usleep((rand() % 180 + 60) * 100000);
+	usleep((rand() % 180 + 60) * 1000);
 	enter_customer = 1;
 	pthread_exit(NULL);
 }
@@ -60,7 +60,7 @@ void *customer_thread(void *arg){
 	// Statistics should go down here
 	printf("Calculating statistics for the day...\n");
 	printf("Total Customers: %d\n", customer_count);
-	printf("Max transaction time: %d", max_transaction_time(queue));
+	printf("Max transaction time: %d\n", max_transaction_time(queue));
 	free(queue);
 	pthread_exit(NULL);
 }
