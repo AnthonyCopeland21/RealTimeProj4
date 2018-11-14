@@ -60,7 +60,22 @@ void *customer_thread(void *arg){
 	// Statistics should go down here
 	printf("Calculating statistics for the day...\n");
 	printf("Total Customers: %d\n", customer_count);
-
+	printf("Max transaction time: %d", max_transaction_time(queue));
 	free(queue);
 	pthread_exit(NULL);
+}
+
+/* Purpose: Calculate the max transaction time
+ * Inputs:  Customer * customers, all customers that have come through
+ * Output:  None
+ */
+int max_transaction_time(Customer *customers) {
+	int max = 0;
+	int i = 0;
+	for(i = 0; i <= sizeof(customers); i++) {
+		if (customers[i].transaction_time > max) {
+			max = customers[i].transaction_time;
+		}
+	}
+	return max;
 }
