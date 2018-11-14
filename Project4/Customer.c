@@ -22,6 +22,7 @@ void *customer_thread(void *arg){
 	// initialize customer arguments
 	Customer *queue;
 	pthread_t add_cust_id;
+	int i = 0;
 	int j = 0;
 	int customer_count = 0;
 	int next_customer = 0;
@@ -61,6 +62,9 @@ void *customer_thread(void *arg){
 	printf("Calculating statistics for the day...\n");
 	printf("Total Customers: %d\n", customer_count);
 	printf("Max transaction time: %d\n", (max_transaction_time(queue))/1400);
+	for (i = 0; i < 2; i++){
+		printf("Teller %d: %d\n", i, get_teller_customer_count(i));
+	}
 	free(queue);
 	pthread_exit(NULL);
 }
