@@ -75,6 +75,7 @@ void *teller_thread(void *arg){
 	while(get_bank_open()){
 		// this is only set to 0 in customer thread
 		if(!tellers[i].available){
+			tellers[i].total_customer_count += 1;
 			usleep(tellers[i].customer_transaction_time);
 			tellers[i].available = 1;
 		}
@@ -83,4 +84,6 @@ void *teller_thread(void *arg){
 	pthread_exit(NULL);
 }
 
-
+int get_teller_customer_count(int teller_num){
+	return tellers[teller_num].total_customer_count;
+}
