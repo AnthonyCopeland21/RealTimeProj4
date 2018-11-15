@@ -76,7 +76,7 @@ void *teller_thread(void *arg){
 		// this is only set to 0 in customer thread
 		if(!tellers[i].available){
 			tellers[i].total_customer_count += 1;
-			usleep(tellers[i].customer_transaction_time * 100000);
+			usleep(tellers[i].customer_transaction_time);
 			tellers[i].available = 1;
 		}
 	}
