@@ -1,7 +1,8 @@
 #include "Bank.h"
 
 void bank_is_open(){
-	open_bank_timer(10);
+	// This function call below controls the number of real-time seconds the bank is open
+	open_bank_timer(42);
 	while (get_bank_open()){
 		usleep(10);
 	}
@@ -10,6 +11,7 @@ void bank_is_open(){
 
 void prep_for_open(){
 	printf("Welcome to the Bank!\n");
+
 	int ret = 0;
 
 	pthread_t queue_id;

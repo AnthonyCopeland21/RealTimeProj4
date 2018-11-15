@@ -24,6 +24,7 @@ void *customer_thread(void *arg){
 	pthread_t add_cust_id;
 	int i = 0;
 	int j = 0;
+	int max_queue_depth = 0;
 	int customer_count = 0;
 	int next_customer = 0;
 	int ret = 0;
@@ -41,38 +42,61 @@ void *customer_thread(void *arg){
 		// customer has entered. add him to queue
 		if(enter_customer){
 			gettimeofday(&start, NULL);
-			queue[customer_count].queue_enter_time = start.tv_usec * 1000000 + start.tv_sec;
+			queue[customer_count].queue_enter_time = start.tv_usec * 0.000001 + start.tv_sec;
+			//printf("%fl\n", queue[customer_count].queue_enter_time);
 			queue[customer_count].transaction_time = (rand() % 450 + 30) * TIMING_SCALE;
-			printf("Set transaction time to %d for Customer %d\n", queue[customer_count].transaction_time, customer_count);
+			//printf("Set transaction time to %d for Customer %d\n", queue[customer_count].transaction_time, customer_count);
 			customer_count++;
-
+			if((customer_count-next_customer) > max_queue_depth) max_queue_depth = customer_count - next_customer;
 			enter_customer = 0;
 			ret = pthread_create(&add_cust_id, NULL, &add_customer, (void *)NULL);
 		}
 		j = available_teller();
 		if (j != -1 && next_customer < customer_count) {
-			printf("Teller %d taking customer %d\n", j, next_customer);
+			//printf("Teller %d taking customer %d\n", j, next_customer);
 			gettimeofday(&stop, NULL);
-			queue[customer_count].queue_exit_time = stop.tv_usec * 1000000 + start.tv_sec;
+			queue[next_customer].queue_exit_time = stop.tv_usec * 0.000001 + stop.tv_sec;
 			set_transaction_time(queue[next_customer].transaction_time, j);
 			set_available(0, j);
 			next_customer++;
 		}
 	}
 	// wait for all customers to be taken care of
-	//printf("Customers that came in: %d\nCustomers left: %d\n",customer_count,(customer_count-next_customer));
-
 
 	// Statistics should go down here
 	printf("Calculating statistics for the day...\n\n");
+
 	printf("Total Customers: %d\n", customer_count);
-	int max_transaction = max_transaction_time(queue, customer_count);
-	printf("Max transaction time: %d minutes %d seconds\n", max_transaction/60, max_transaction%60);
-	int max_queue = max_queue_time(queue, customer_count);
-	printf("Max queue time: %d minutes %d seconds\n",max_queue/60, max_queue%60);
 	for (i = 0; i < 3; i++){
 		printf("Teller %d: %d\n", i, get_teller_customer_count(i));
 	}
+
+	int max_wait = max_wait_time() * 100000;
+	printf("Max teller wait time: %d minutes %d seconds\n", max_wait/10000, (max_wait % 10000)/167);
+
+	int max_transaction = max_transaction_time(queue, customer_count);
+	printf("Max transaction time: %d minutes %d seconds\n", max_transaction/60, max_transaction%60);
+
+	int max_queue = max_queue_time(queue, customer_count) * 100000;
+	printf("Max queue time: %d minutes %d seconds\n", max_queue/10000, (max_queue % 10000)/167);
+
+	printf("Max queue depth: %d\n", max_queue_depth);
+
+	int avg_transaction = average_customer_transaction_time(queue, customer_count);
+	printf("Average transaction time: %d minutes and %d seconds\n", avg_transaction/60, avg_transaction%60);
+
+	unsigned int avg_queue = average_queue_time(queue, customer_count) * 100000;
+	printf("Average queue time: %d minutes %d seconds\n", avg_queue/10000, (avg_queue % 10000)/167);
+
+	unsigned int avg_wait = average_wait_time() * 100000;
+	printf("Average teller wait time: %d minutes %d seconds\n", avg_wait/10000, (avg_wait % 10000)/167);
+
+	if (get_activate_breaks()){
+		// Print out statistics for Teller breaks here
+		// You could a similar method to avg_wait, avg_queue, max_wait, and max_queue, which all use the method suggested
+		// back in teller_thread()
+	}
+
 	free(queue);
 	pthread_exit(NULL);
 }
@@ -98,13 +122,41 @@ int max_transaction_time(Customer *customers, int total) {
  * 			total, number of customers
  * Output:  None
  */
-int max_queue_time(Customer *customers, int total) {
-	int max = 0;
+double max_queue_time(Customer *customers, int total) {
+	double max = 0;
 	int i = 0;
 	for(i = 0; i < total; i++) {
-		if ((customers[i].queue_exit_time - customers[i].queue_enter_time)> max) {
+		if ((customers[i].queue_exit_time - customers[i].queue_enter_time) > max) {
 			max = customers[i].queue_exit_time - customers[i].queue_enter_time;
 		}
 	}
-	return max/TIMING_SCALE;
+	return max;
+}
+
+/* Purpose: Calculate the average queue time
+ * Inputs:  Customer * customers, all customers that have come through
+ * 			total, number of customers
+ * Output:  None
+ */
+int average_customer_transaction_time(Customer *customers, int total) {
+	int sum_time = 0;
+	int i = 0;
+	for (i = 0; i < total; i++){
+		sum_time += customers[i].transaction_time;
+	}
+	return (sum_time/TIMING_SCALE)/total;
+}
+
+/* Purpose: Calculate the average queue time
+ * Inputs:  Customer * customers, all customers that have come through
+ * 			total, number of customers
+ * Output:  None
+ */
+double average_queue_time(Customer *customers, int total) {
+	double average = 0;
+	int i = 0;
+	for(i = 0; i < total; i++) {
+		average += (customers[i].queue_exit_time - customers[i].queue_enter_time)/total;
+	}
+	return average;
 }
