@@ -61,7 +61,19 @@ void *customer_thread(void *arg){
 			next_customer++;
 		}
 	}
+	if (next_customer < customer_count) printf("Overtime required...\n");
 	// wait for all customers to be taken care of
+	while (next_customer < customer_count) {
+		j = available_teller();
+		if (j != -1){
+			gettimeofday(&stop, NULL);
+			queue[next_customer].queue_exit_time = stop.tv_usec * 0.000001 + stop.tv_sec;
+			set_transaction_time(queue[next_customer].transaction_time, j);
+			set_available(0, j);
+			next_customer++;
+		}
+	}
+	set_overtime(0);
 
 	// Statistics should go down here
 	printf("Calculating statistics for the day...\n\n");
