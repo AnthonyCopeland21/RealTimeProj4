@@ -10,7 +10,7 @@ typedef struct {
 	int available;
 	int next_to_break;
 	int break_number;		// number of breaks taken
-	double break_time;		// how long the break will be
+	int break_time;		// how long the break will be
 	double break_count_start;
 	double break_count_current;
 	double break_count_stop;

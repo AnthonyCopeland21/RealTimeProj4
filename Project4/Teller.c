@@ -60,7 +60,7 @@ void set_available(int available, int teller){
  */
 void *teller_thread(void *arg){
 	int i = (int)arg;
-	int start_wait = 0;
+	int start_wait = 1;
 	struct timeval start, stop, current;
 	// initialize teller arguments
 	tellers[i].available = 0;
@@ -80,18 +80,26 @@ void *teller_thread(void *arg){
 	}
 	tellers[i].available = 1;
 	// loop to wait for bank to close and customer queue to be 0
-	while(get_bank_open() && get_overtime()){
+	while(get_bank_open() || get_overtime()){
 		if(activate_breaks){
-			tellers[i].break_time = (rand() % 1800 + 1800) * TIMING_SCALE;
-			printf("Random break time is: %fl\n", tellers[i].break_time);
-			gettimeofday(&start, NULL);
-			tellers[i].break_count_start = start.tv_usec * 0.000001 + start.tv_sec;
-			while(tellers[i].time_for_break != tellers[i].break_time){
-				gettimeofday(&current, NULL);
-				tellers[i].break_count_current = current.tv_usec * 0.000001 + current.tv_sec;
-				tellers[i].time_for_break = tellers[i].break_count_current - tellers[i].break_count_start;
+			// tellers[i].break_time should only be set once when the teller is up next for their break
+			// otherwise each time this loop goes, it will be randomizing the break time
+			if (start_wait && tellers[i].next_to_break) {
+				tellers[i].break_time = (rand() % 1800 + 1800);
+				printf("Random break time is: %d seconds\n", tellers[i].break_time);
+				gettimeofday(&start, NULL);
+				tellers[i].break_count_start = start.tv_usec * 0.000001 + start.tv_sec;
+				start_wait = 0;
 			}
-			if (tellers[i].next_to_break && tellers[i].available){
+			// same with the start, this start should only occur once otherwise
+			// it will constantly be updating the time for start
+			// with this while loop, then the teller wont be able to help customers because it will be stuck
+			// here until the condition is met. you dont want a loop, or a conditional here just check for
+			// current time each 
+			gettimeofday(&current, NULL);
+			tellers[i].break_count_current = current.tv_usec * 0.000001 + current.tv_sec;
+			tellers[i].time_for_break = tellers[i].break_count_current - tellers[i].break_count_start;
+			if (tellers[i].next_to_break && tellers[i].available /*&& (tellers[i].break_count_current - tellers[i].break_count_start) and some conversion >= tellers[i].break_time*/){
 				tellers[i].available = 0;
 				tellers[i].break_count_start = start.tv_usec * 0.000001 + start.tv_sec;
 				usleep((rand() % 180 + 60) * TIMING_SCALE);

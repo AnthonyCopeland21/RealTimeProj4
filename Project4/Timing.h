@@ -19,6 +19,7 @@ void open_bank_timer(int seconds_open);
 void *close_bank(void *arg);
 int get_bank_open(void);
 int get_overtime(void);
+void set_overtime(int ot);
 
 
 #endif /* TIMING_H_*/
