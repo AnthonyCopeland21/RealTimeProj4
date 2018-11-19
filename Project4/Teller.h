@@ -3,11 +3,19 @@
 
 #include "Timing.h"
 
+#define TIMING_SCALE (1500)
+
 // STRUCTS
 typedef struct {
 	int available;
+	int next_to_break;
 	int break_number;		// number of breaks taken
 	double break_time;		// how long the break will be
+	double break_count_start;
+	double break_count_current;
+	double break_count_stop;
+	double time_for_break;
+	double break_length;
 	int customer_transaction_time;
 	double all_waits[420];
 	double start_wait_time;
@@ -26,6 +34,7 @@ double average_wait_time();
 void set_transaction_time(int trans_time, int teller);
 void set_available(int available, int teller);
 void *teller_thread(void *arg);
+int next_teller_break(void);
 
 
 #endif /* TELLER_H_ */

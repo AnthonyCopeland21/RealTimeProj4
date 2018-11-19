@@ -2,7 +2,8 @@
 
 // GLOBALS
 static Teller tellers[3];
-static int activate_breaks = 0;
+static int activate_breaks = 1;
+static int next_teller_to_break = next_teller_break();
 
 /* Purpose: Provide next available teller
  * Inputs: tellers - array of all tellers
@@ -60,9 +61,11 @@ void set_available(int available, int teller){
 void *teller_thread(void *arg){
 	int i = (int)arg;
 	int start_wait = 0;
-	struct timeval start, stop;
+	struct timeval start, stop, current;
 	// initialize teller arguments
 	tellers[i].available = 0;
+	if (i == next_teller_to_break) tellers[i].next_to_break = 1;
+	else tellers[i].next_to_break = 0;
 	tellers[i].break_number = 0;
 	tellers[i].break_time = 0;
 	tellers[i].customer_transaction_time = 0;
@@ -77,8 +80,26 @@ void *teller_thread(void *arg){
 	}
 	tellers[i].available = 1;
 	// loop to wait for bank to close and customer queue to be 0
-	while(get_bank_open()){
+	while(get_bank_open() && get_overtime()){
 		if(activate_breaks){
+			tellers[i].break_time = (rand() % 1800 + 1800) * TIMING_SCALE;
+			printf("Random break time is: %fl\n", tellers[i].break_time);
+			gettimeofday(&start, NULL);
+			tellers[i].break_count_start = start.tv_usec * 0.000001 + start.tv_sec;
+			while(tellers[i].time_for_break != tellers[i].break_time){
+				gettimeofday(&current, NULL);
+				tellers[i].break_count_current = current.tv_usec * 0.000001 + current.tv_sec;
+				tellers[i].time_for_break = tellers[i].break_count_current - tellers[i].break_count_start;
+			}
+			if (tellers[i].next_to_break && tellers[i].available){
+				tellers[i].available = 0;
+				tellers[i].break_count_start = start.tv_usec * 0.000001 + start.tv_sec;
+				usleep((rand() % 180 + 60) * TIMING_SCALE);
+				tellers[i].break_count_stop = stop.tv_usec * 0.000001 + stop.tv_sec;
+				tellers[i].break_length = tellers[i].break_count_stop - tellers[i].break_count_start;
+				tellers[i].available = 1;
+				tellers[i].break_number++;
+			}
 			// this means that breaks are activated
 			// I would use the struct timeval and the function gettimeofday(&VARIABLE, NULL) for both time until a break
 			// and duration of breaks. See how I used them for the Customer queue_enter_time and queue_exit time
@@ -105,6 +126,7 @@ void *teller_thread(void *arg){
 			tellers[i].available = 1;
 		}
 	}
+
 
 	pthread_exit(NULL);
 }
@@ -142,3 +164,6 @@ double average_wait_time(){
 	return average;
 }
 
+int next_teller_break(void){
+	return (rand() % 3 + 0);
+}
