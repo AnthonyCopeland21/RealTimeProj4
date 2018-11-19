@@ -2,7 +2,7 @@
 
 void bank_is_open(){
 	// This function call below controls the number of real-time seconds the bank is open
-	open_bank_timer(10);
+	open_bank_timer(42);
 	while (get_bank_open() && get_overtime()){
 		usleep(10);
 	}

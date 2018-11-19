@@ -2,8 +2,8 @@
 
 // GLOBALS
 static Teller tellers[3];
-static int activate_breaks = 1;
-static int next_teller_to_break = next_teller_break();
+static int activate_breaks = 0;
+static int next_teller_to_break = 0;
 
 /* Purpose: Provide next available teller
  * Inputs: tellers - array of all tellers
@@ -34,6 +34,7 @@ void create_teller_threads(){
 			exit(EXIT_FAILURE);
 		}
 	}
+	next_teller_to_break = next_teller_break();
 }
 
 /* Purpose: Set transaction time for available teller
@@ -60,8 +61,10 @@ void set_available(int available, int teller){
  */
 void *teller_thread(void *arg){
 	int i = (int)arg;
+	int j = 0;
 	int start_wait = 1;
-	struct timeval start, stop, current;
+	int start_teller_wait = 1;
+	struct timeval teller_start, start, stop, current;
 	// initialize teller arguments
 	tellers[i].available = 0;
 	if (i == next_teller_to_break) tellers[i].next_to_break = 1;
@@ -82,56 +85,44 @@ void *teller_thread(void *arg){
 	// loop to wait for bank to close and customer queue to be 0
 	while(get_bank_open() || get_overtime()){
 		if(activate_breaks){
-			// tellers[i].break_time should only be set once when the teller is up next for their break
-			// otherwise each time this loop goes, it will be randomizing the break time
 			if (start_wait && tellers[i].next_to_break) {
 				tellers[i].break_time = (rand() % 1800 + 1800);
-				printf("Random break time is: %d seconds\n", tellers[i].break_time);
 				gettimeofday(&start, NULL);
 				tellers[i].break_count_start = start.tv_usec * 0.000001 + start.tv_sec;
 				start_wait = 0;
 			}
-			// same with the start, this start should only occur once otherwise
-			// it will constantly be updating the time for start
-			// with this while loop, then the teller wont be able to help customers because it will be stuck
-			// here until the condition is met. you dont want a loop, or a conditional here just check for
-			// current time each 
 			gettimeofday(&current, NULL);
 			tellers[i].break_count_current = current.tv_usec * 0.000001 + current.tv_sec;
 			tellers[i].time_for_break = tellers[i].break_count_current - tellers[i].break_count_start;
-			if (tellers[i].next_to_break && tellers[i].available /*&& (tellers[i].break_count_current - tellers[i].break_count_start) and some conversion >= tellers[i].break_time*/){
+
+			if (tellers[i].next_to_break && tellers[i].available && (tellers[i].time_for_break * 1000) >= tellers[i].break_time){
 				tellers[i].available = 0;
-				tellers[i].break_count_start = start.tv_usec * 0.000001 + start.tv_sec;
-				usleep((rand() % 180 + 60) * TIMING_SCALE);
-				tellers[i].break_count_stop = stop.tv_usec * 0.000001 + stop.tv_sec;
-				tellers[i].break_length = tellers[i].break_count_stop - tellers[i].break_count_start;
+				tellers[i].break_waits[j] = (rand() % 180 + 60);
+				usleep(tellers[i].break_waits[j] * TIMING_SCALE);
 				tellers[i].available = 1;
 				tellers[i].break_number++;
+				start_wait = 1;
+				j++;
+				tellers[i].next_to_break = 0;
+				next_teller_to_break = next_teller_break();
+				tellers[next_teller_to_break].next_to_break = 1;
 			}
-			// this means that breaks are activated
-			// I would use the struct timeval and the function gettimeofday(&VARIABLE, NULL) for both time until a break
-			// and duration of breaks. See how I used them for the Customer queue_enter_time and queue_exit time
-			// as well as the Teller start_wait_time and Teller stop_wait_time
-			//
-			// You could create a random wait time using rand() and wait until the current time is greater than
-			// the struct timeval variable + random wait time, then you can set the availability of the teller to 0 and use
-			// usleep to sleep a random duration/break
-			//
-			// The next thing would be creating functions to return the average, longest, and shortest break times for
-			// each teller. You can call the functions from Customer.c in customer_thread() with all the other stats
 		}
-		if (start_wait == 0){
-			gettimeofday(&start, NULL);
-			tellers[i].start_wait_time = start.tv_usec * 0.000001 + start.tv_sec;
+		if (start_teller_wait && tellers[i].available){
+			gettimeofday(&teller_start, NULL);
+			tellers[i].start_wait_time = teller_start.tv_sec + teller_start.tv_usec * 0.000001;
+			start_teller_wait = 0;
 		}
 		// this is only set to 0 in customer thread
 		if(!tellers[i].available){
 			gettimeofday(&stop, NULL);
 			tellers[i].end_wait_time = stop.tv_usec * 0.000001 + stop.tv_sec;
 			tellers[i].all_waits[tellers[i].total_customer_count] = tellers[i].end_wait_time - tellers[i].start_wait_time;
-			tellers[i].total_customer_count += 1;
+			//printf("Customer serviced. Teller %d waited %f", i, tellers[i].all_waits[tellers[i].total_customer_count]);
 			usleep(tellers[i].customer_transaction_time);
+			tellers[i].total_customer_count++;
 			tellers[i].available = 1;
+			start_teller_wait = 1;
 		}
 	}
 
@@ -143,8 +134,12 @@ int get_teller_customer_count(int teller_num){
 	return tellers[teller_num].total_customer_count;
 }
 
+int get_teller_break_count(int teller_num_break){
+	return tellers[teller_num_break].break_number;
+}
+
 int get_activate_breaks(void){
-	return (int)get_activate_breaks;
+	return activate_breaks;
 }
 
 double max_wait_time(){
@@ -153,7 +148,7 @@ double max_wait_time(){
 	int j = 0;
 	for (i = 0; i < 3; i++){
 		for(j = 0; j < tellers[i].total_customer_count; j++){
-			if (max < tellers[i].all_waits[i]) max = tellers[i].all_waits[j];
+			if (max < tellers[i].all_waits[j]) max = tellers[i].all_waits[j];
 		}
 	}
 	return max;
@@ -172,6 +167,35 @@ double average_wait_time(){
 	return average;
 }
 
+double average_break_time(int teller_num){
+	double average_break = 0;
+	int i = 0;
+	int total = tellers[teller_num].break_number;
+
+	for (i = 0; i < tellers[teller_num].break_number; i++){
+		average_break += tellers[teller_num].break_waits[i]/total;
+	}
+	return average_break;
+}
+
+double max_break_time(int teller_num){
+	double max_break = 0;
+	int i = 0;
+	for (i = 0; i < tellers[teller_num].break_number; i++){
+		if (max_break < tellers[teller_num].break_waits[i]) max_break = tellers[teller_num].break_waits[i]; //Check this
+	}
+	return max_break;
+}
+
+double min_break_time(int teller_num){
+	double min_break = tellers[teller_num].break_waits[0];
+	int i = 0;
+	for (i = 0; i < tellers[teller_num].break_number; i++){
+		if (min_break > tellers[teller_num].break_waits[i]) min_break = tellers[teller_num].break_waits[i]; //Check this
+	}
+	return min_break;
+}
+
 int next_teller_break(void){
-	return (rand() % 3 + 0);
+	return (rand() % 3);
 }

@@ -83,7 +83,7 @@ void *customer_thread(void *arg){
 		printf("Teller %d: %d\n", i, get_teller_customer_count(i));
 	}
 
-	int max_wait = max_wait_time() * 100000;
+	int max_wait = max_wait_time() * 10000;
 	printf("Max teller wait time: %d minutes %d seconds\n", max_wait/10000, (max_wait % 10000)/167);
 
 	int max_transaction = max_transaction_time(queue, customer_count);
@@ -102,8 +102,31 @@ void *customer_thread(void *arg){
 
 	unsigned int avg_wait = average_wait_time() * 100000;
 	printf("Average teller wait time: %d minutes %d seconds\n", avg_wait/10000, (avg_wait % 10000)/167);
-
+	printf("\n");
 	if (get_activate_breaks()){
+
+		for (i = 0; i < 3; i++){
+			printf("Total number of breaks for Teller %d: %d\n", i+1, get_teller_break_count(i));
+		}
+		printf("\n");
+		unsigned int avg_break = 0;
+		for (i = 0; i < 3; i++){
+			avg_break = average_break_time(i);
+			printf("Average Teller %d break time: %d minutes %d seconds\n", i+1, avg_break/60, avg_break % 60);
+		}
+		printf("\n");
+		int max_break = 0;
+		for (i = 0; i < 3; i++){
+			max_break = max_break_time(i);
+			printf("Max Teller %d break time: %d minutes %d seconds\n", i+1, max_break/60, max_break % 60);
+		}
+		printf("\n");
+		int min_break = 0;
+		for (i = 0; i < 3; i++){
+			min_break = min_break_time(i);
+			printf("Min Teller %d break time: %d minutes %d seconds\n", i+1, min_break/60, min_break%60);
+		}
+
 		// Print out statistics for Teller breaks here
 		// You could a similar method to avg_wait, avg_queue, max_wait, and max_queue, which all use the method suggested
 		// back in teller_thread()
