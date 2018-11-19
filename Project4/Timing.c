@@ -48,3 +48,11 @@ void open_bank_timer(int seconds_open){
 int get_bank_open(void){
 	return bank_open;
 }
+
+int get_overtime(void){
+	return overtime;
+}
+
+void set_overtime(int ot){
+	overtime = ot;
+}

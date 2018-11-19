@@ -12,10 +12,13 @@
 #include <unistd.h>
 
 static int bank_open = 0;
+static int overtime = 1;
 
 // PROTOTYPES
 void open_bank_timer(int seconds_open);
 void *close_bank(void *arg);
 int get_bank_open(void);
+int get_overtime(void);
+
 
 #endif /* TIMING_H_*/
