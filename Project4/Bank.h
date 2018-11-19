@@ -6,7 +6,7 @@
 #include "Timing.h"
 
 // PROTOTYPES
-void prep_for_open(void);
 void bank_is_open(void);
+void prep_for_open(void);
 
 #endif /* BANK_H_ */

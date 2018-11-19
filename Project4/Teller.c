@@ -1,18 +1,18 @@
 #include "Teller.h"
 
 // GLOBALS
-static Teller tellers[3];
-static int activate_breaks = 0;
-static int next_teller_to_break = 0;
+static Teller tellers[3];  // array of Teller structures
+static int activate_breaks = 0;  // flag for whether or not breaks are included
+static int next_teller_to_break = 0;  // global for next teller that is intended to go on break
 
 /* Purpose: Provide next available teller
- * Inputs: tellers - array of all tellers
- * Output: 1->length of tellers for available teller
- * 		   -1 for no available teller
+ * Inputs:  tellers - array of all tellers
+ * Outputs: 1->length of tellers for available teller
+ * 		    -1 for no available teller
  */
 int available_teller(void) {
 	int i = 0;
-	// loop runs through tellers that
+	// loop runs through tellers and returns which teller is available
 	for (i = 0; i < (sizeof(tellers)/sizeof(tellers[0])); i++){
 		if (tellers[i].available) return i;
 	}
@@ -26,7 +26,7 @@ int available_teller(void) {
 void create_teller_threads(){
 	int ret = 0;
 	int i;
-	// loop to create 3 teller threads
+	// loop to create 3 teller threads and exits if errors occur
 	for(i = 0; i < 3; i++) {
 		ret = pthread_create(&tellers[i].id, NULL, &teller_thread, (void *)i);
 		if (ret != 0){
@@ -40,7 +40,7 @@ void create_teller_threads(){
 /* Purpose: Set transaction time for available teller
  * Inputs:  trans_time - time for transaction
  * 			teller - 0->2 for available teller
- * Output:  None
+ * Outputs: None
  * */
 void set_transaction_time(int trans_time, int teller){
 	tellers[teller].customer_transaction_time = trans_time;
@@ -130,22 +130,39 @@ void *teller_thread(void *arg){
 	pthread_exit(NULL);
 }
 
+/* Purpose: Getter for the customer count of specified teller
+ * Inputs:  teller_num, 0->2 to specify teller
+ * Outputs: total_customer_count, from specified teller
+ */
 int get_teller_customer_count(int teller_num){
 	return tellers[teller_num].total_customer_count;
 }
 
+/* Purpose: Getter for break count of specified teller
+ * Inputs:  teller_num, 0->2 to specify teller
+ * Outputs: total_customer_count, from specified teller
+ */
 int get_teller_break_count(int teller_num_break){
 	return tellers[teller_num_break].break_number;
 }
 
+/* Purpose: Getter for global variable activate_breaks
+ * Inputs:  None
+ * Outputs: activate_breaks, int flag
+ */
 int get_activate_breaks(void){
 	return activate_breaks;
 }
 
-double max_wait_time(){
+/* Purpose: Determine max wait time from tellers
+ * Inputs:  None
+ * Outputs: max, double variable max wait time for tellers
+ */
+double max_wait_time(void){
 	double max = 0;
 	int i = 0;
 	int j = 0;
+	// loop to go through tellers and determine max wait time
 	for (i = 0; i < 3; i++){
 		for(j = 0; j < tellers[i].total_customer_count; j++){
 			if (max < tellers[i].all_waits[j]) max = tellers[i].all_waits[j];
@@ -154,11 +171,16 @@ double max_wait_time(){
 	return max;
 }
 
-double average_wait_time(){
+/* Purpose: Determine average wait time for tellers
+ * Inputs:  None
+ * Outputs: average, double variable for average wait time for all tellers
+ */
+double average_wait_time(void){
 	double average = 0;
 	int i = 0;
 	int j = 0;
 	int total = tellers[0].total_customer_count + tellers[1].total_customer_count + tellers[2].total_customer_count;
+	// loop to go through tellers and determine average wait time
 	for (i = 0; i < 3; i++){
 		for(j = 0; j < tellers[i].total_customer_count; j++){
 			average += tellers[i].all_waits[j]/total;
@@ -167,35 +189,53 @@ double average_wait_time(){
 	return average;
 }
 
+/* Purpose: Determine average break time of specified teller
+ * Inputs:  teller_num, int variable of specified teller
+ * Outputs: average_break, double variable average break time for specified teller
+ */
 double average_break_time(int teller_num){
 	double average_break = 0;
 	int i = 0;
 	int total = tellers[teller_num].break_number;
-
+	// loop to go through tellers and determine average break time
 	for (i = 0; i < tellers[teller_num].break_number; i++){
 		average_break += tellers[teller_num].break_waits[i]/total;
 	}
 	return average_break;
 }
 
+/* Purpose: Determine max break time of specified teller
+ * Inputs:  teller_num, int variable of specified teller
+ * Outputs: max_break, double variable max break time for specified teller
+ */
 double max_break_time(int teller_num){
 	double max_break = 0;
 	int i = 0;
+	// loop to go through tellers and determine max break time
 	for (i = 0; i < tellers[teller_num].break_number; i++){
 		if (max_break < tellers[teller_num].break_waits[i]) max_break = tellers[teller_num].break_waits[i]; //Check this
 	}
 	return max_break;
 }
 
+/* Purpose: Determine min break time of specified teller
+ * Inputs:  teller_num, int variable of specified teller
+ * Outputs: min_break, double variable min break time for specified teller
+ */
 double min_break_time(int teller_num){
 	double min_break = tellers[teller_num].break_waits[0];
 	int i = 0;
+	// loop to go through tellers and determine min break time
 	for (i = 0; i < tellers[teller_num].break_number; i++){
 		if (min_break > tellers[teller_num].break_waits[i]) min_break = tellers[teller_num].break_waits[i]; //Check this
 	}
 	return min_break;
 }
 
+/* Purpose: Create a random number 0, 1, or 2 for randomizing teller breaks
+ * Inputs:  None
+ * Outputs: random int from 0->2
+ */
 int next_teller_break(void){
 	return (rand() % 3);
 }

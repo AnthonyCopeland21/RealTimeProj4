@@ -3,10 +3,12 @@
 
 #include "Timing.h"
 
-#define TIMING_SCALE (1500)
+// CONSTANTS 
+#define TIMING_SCALE (1500)  // this is used to scale timing for the usleeps
 
+// STRUCTS
 typedef struct{
-	double queue_enter_time;
+	double queue_enter_time; 
 	double queue_exit_time;
 	int transaction_time;
 } Customer;

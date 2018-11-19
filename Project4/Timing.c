@@ -1,6 +1,9 @@
 #include "Timing.h"
 
-#include <math.h>
+/* Purpose: Thread to delete timer and close bank once timer ends
+ * Inputs:  standard thread args
+ * Outputs: None
+ */
 void *close_bank(void *arg){
 	bank_open = 0;
 	time_t rawtime;
@@ -12,6 +15,10 @@ void *close_bank(void *arg){
 	pthread_exit(NULL);
 }
 
+/* Purpose: Create bank timer that will create a thread when the timer event occurs
+ * Inputs:  seconds_open, number of seconds the timer should be running
+ * Outputs: None
+ */
 void open_bank_timer(int seconds_open){
 	time_t rawtime;
 	struct tm * timeinfo;
@@ -45,14 +52,26 @@ void open_bank_timer(int seconds_open){
 	timer_settime(timer_id, 0, &value, &old_value);
 }
 
+/* Purpose: Getter for global variable bank_open
+ * Inputs:  None
+ * Outputs: bank_open, global int flag
+ */
 int get_bank_open(void){
 	return bank_open;
 }
 
+/* Purpose: Getter for global variable overtime
+ * Inputs:  None
+ * Outputs: overtime, global int flag
+ */
 int get_overtime(void){
 	return overtime;
 }
 
+/* Purpose: Setter for global variable overtime
+ * Inputs:  ot, int of 0 or 1
+ * Outputs: None
+ */
 void set_overtime(int ot){
 	overtime = ot;
 }
