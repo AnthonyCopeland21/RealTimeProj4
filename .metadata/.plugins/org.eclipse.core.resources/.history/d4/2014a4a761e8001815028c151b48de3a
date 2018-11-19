@@ -1,0 +1,89 @@
+#include "Teller.h"
+
+// GLOBALS
+static Teller tellers[3];
+
+/* Purpose: Provide next available teller
+ * Inputs: tellers - array of all tellers
+ * Output: 1->length of tellers for available teller
+ * 		   -1 for no available teller
+ */
+int available_teller(void) {
+	int i = 0;
+	// loop runs through tellers that
+	for (i = 0; i < (sizeof(tellers)/sizeof(tellers[0])); i++){
+		if (tellers[i].available) return i;
+	}
+	return -1;
+}
+
+/* Purpose: Creates threads for tellers
+ * Inputs:  None
+ * Outputs: None
+ */
+void create_teller_threads(void){
+	int ret = 0;
+	int i;
+	// loop to create 3 teller threads
+	for(i = 0; i < 3; i++) {
+		ret = pthread_create(&tellers[i].id, NULL, &teller_thread, (void *)i);
+		if (ret != 0){
+			printf("ERROR: pthread_create() failed\n");
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
+/* Purpose: Set transaction time for available teller
+ * Inputs:  trans_time - time for transaction
+ * 			teller - 0->2 for available teller
+ * Output:  None
+ * */
+void set_transaction_time(int trans_time, int teller){
+	tellers[teller].customer_transaction_time = trans_time;
+}
+
+/* Purpose: Set availability for teller
+ * Inputs:  available - teller availability
+ * 			teller - 0->2 for available teller
+ * Output:  None
+ * */
+void set_available(int available, int teller){
+	tellers[teller].available = available;
+}
+
+/* Purpose: Thread function for the teller
+ * Inputs:  None
+ * Output:  None
+ */
+void *teller_thread(void *arg){
+	int i = (int)arg;
+	// initialize teller arguments
+	tellers[i].available = 0;
+	tellers[i].break_number = 0;
+	tellers[i].break_time = 0;
+	tellers[i].customer_transaction_time = 0;
+	tellers[i].total_customer_count = 0;
+
+	printf("Creation of teller %d\n", i+1);
+	// loop to wait for bank to open
+	while(!get_bank_open()){
+		usleep(10);
+	}
+	tellers[i].available = 1;
+	// loop to wait for bank to close and customer queue to be 0
+	while(get_bank_open()){
+		// this is only set to 0 in customer thread
+		if(!tellers[i].available){
+			tellers[i].total_customer_count += 1;
+			usleep(tellers[i].customer_transaction_time);
+			tellers[i].available = 1;
+		}
+	}
+
+	pthread_exit(NULL);
+}
+
+int get_teller_customer_count(int teller_num){
+	return tellers[teller_num].total_customer_count;
+}

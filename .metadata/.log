@@ -816,3 +816,508 @@ HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.e
 HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
 	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
 	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@1e2c9bf)),sourcePriority=16640)
+!SESSION 2018-11-14 17:27:52.550 -----------------------------------------------
+eclipse.buildId=201006232051
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-11-14 17:27:53.033
+!MESSAGE ProvisioningEventBus could not be obtained. Metadata caches may not be cleaned up properly.
+
+!ENTRY org.eclipse.ui.workbench 2 0 2018-11-14 17:28:22.244
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-14 17:28:22.244
+!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@18bbb61),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@18bbb61)),sourcePriority=16640)
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@18bbb61),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@18bbb61)),sourcePriority=16640)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-14 17:33:19.875
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-14 17:38:29.212
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-14 17:44:54.875
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-14 17:53:12.648
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-14 18:05:25.182
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.ui.ide 4 4 2018-11-14 18:10:38.337
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2018-11-14 18:10:38.341
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2018-11-14 18:10:38.342
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers (The system cannot find the path specified)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:46)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1401)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1483)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1024)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:1831)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$5.run(IDEWorkbenchAdvisor.java:453)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+!SESSION 2018-11-17 13:09:50.507 -----------------------------------------------
+eclipse.buildId=201006232051
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-11-17 13:09:51.273
+!MESSAGE ProvisioningEventBus could not be obtained. Metadata caches may not be cleaned up properly.
+
+!ENTRY org.eclipse.ui.workbench 2 0 2018-11-17 13:09:57.810
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-17 13:09:57.810
+!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@1edd9b3),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@1edd9b3)),sourcePriority=16640)
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@1edd9b3),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@1edd9b3)),sourcePriority=16640)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-17 13:15:43.772
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.ui.ide 4 4 2018-11-17 13:36:31.391
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2018-11-17 13:36:31.394
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2018-11-17 13:36:31.394
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers (The system cannot find the path specified)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:46)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1401)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1483)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1024)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:1831)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$5.run(IDEWorkbenchAdvisor.java:453)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+!SESSION 2018-11-18 21:37:19.081 -----------------------------------------------
+eclipse.buildId=201006232051
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.equinox.p2.repository 4 0 2018-11-18 21:37:19.564
+!MESSAGE ProvisioningEventBus could not be obtained. Metadata caches may not be cleaned up properly.
+
+!ENTRY org.eclipse.ui.workbench 2 0 2018-11-18 21:37:27.616
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2018-11-18 21:37:27.616
+!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction':
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@117c0eb),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@117c0eb)),sourcePriority=16640)
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.ui.cheatsheets.actionSet/org.eclipse.ui.cheatsheets.actions.CheatSheetHelpMenuAction,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.ui.cheatsheets.CheatSheetExtensionFactory:helpMenuAction),
+	expression=AndExpression(ActionSetExpression(org.eclipse.ui.cheatsheets.actionSet,org.eclipse.ui.internal.WorkbenchWindow@117c0eb),WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@117c0eb)),sourcePriority=16640)
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.630
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.636
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.644
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.651
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.659
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.667
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.675
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.684
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.692
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.700
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.708
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.716
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.723
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.732
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.837
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.844
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.852
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.860
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.868
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.876
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.884
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.892
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.900
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.917
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.925
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:27.973
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.133
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.140
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.164
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.188
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.196
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.212
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.244
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.276
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.389
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 21:44:28.741
+!MESSAGE 
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 21:56:09.323
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 22:38:49.131
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 22:43:55.713
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 22:49:21.628
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 22:58:07.544
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 23:03:38.150
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 23:26:56.860
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 23:31:47.726
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 23:31:47.733
+!MESSAGE 
+
+!ENTRY org.eclipse.core.runtime 8 1 2018-11-18 23:31:47.741
+!MESSAGE 
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 23:36:29.520
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 23:47:38.498
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-18 23:55:12.209
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-19 00:00:36.707
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2018-11-19 00:07:13.522
+!MESSAGE Could not write metadata for '/helios13.se.rit.edu'.
+!STACK 0
+java.io.FileNotFoundException: Z:\RealTime\RealTimeProj4\.metadata\.plugins\org.eclipse.core.resources\.projects\helios13.se.rit.edu\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1592)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)

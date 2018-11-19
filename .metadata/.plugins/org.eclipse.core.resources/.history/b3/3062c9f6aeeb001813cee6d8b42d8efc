@@ -1,0 +1,32 @@
+#ifndef TELLER_H_
+#define TELLER_H_
+
+#include "Timing.h"
+
+// STRUCTS
+typedef struct {
+	int available;
+	int break_number;		// number of breaks taken
+	double break_time;		// how long the break will be
+	int customer_transaction_time;
+	double all_waits[420];
+	double start_wait_time;
+	double end_wait_time;
+	int total_customer_count;
+	pthread_t id;
+} Teller;
+
+// PROTOTYPES
+int available_teller(void);
+void create_teller_threads();
+int get_teller_customer_count(int teller_num);
+int get_activate_breaks(void);
+double max_wait_time();
+double average_wait_time();
+void set_transaction_time(int trans_time, int teller);
+void set_available(int available, int teller);
+void *teller_thread(void *arg);
+int next_teller_break(void);
+
+
+#endif /* TELLER_H_ */
