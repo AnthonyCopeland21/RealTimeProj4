@@ -13,7 +13,6 @@ typedef struct {
 	int break_time;		
 	double break_count_start;
 	double break_count_current;
-	double break_count_stop;
 	double time_for_break;
 	int break_waits[50];
 	int customer_transaction_time;
