@@ -3,6 +3,7 @@
 
 #include "Teller.h"
 #include "Customer.h"
+#include "Timing.h"
 
 // PROTOTYPES
 void prep_for_open(void);

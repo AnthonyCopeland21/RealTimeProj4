@@ -2,8 +2,8 @@
 
 void bank_is_open(){
 	// This function call below controls the number of real-time seconds the bank is open
-	open_bank_timer(42);
-	while (get_bank_open()){
+	open_bank_timer(10);
+	while (get_bank_open() && get_overtime()){
 		usleep(10);
 	}
 	printf("Bank is closed!\n");
